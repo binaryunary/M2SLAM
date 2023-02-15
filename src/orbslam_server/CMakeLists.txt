@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(orbslam_server)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/orbslam_server/cmake/Modules")
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/Modules)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -167,19 +167,19 @@ find_package(ODB REQUIRED COMPONENTS pgsql)
 include(${ODB_USE_FILE})
 
 INCLUDE_DIRECTORIES(
-        ${CMAKE_SOURCE_DIR}/orbslam_server/include)
+        ${PROJECT_SOURCE_DIR}/include)
 
 set(orbslam_server_SOURCES
-        ${CMAKE_SOURCE_DIR}/orbslam_server/src/main.cpp
-        ${CMAKE_SOURCE_DIR}/orbslam_server/include/database.h)
+        ${PROJECT_SOURCE_DIR}/src/main.cpp
+        ${PROJECT_SOURCE_DIR}/include/database.h)
 
 set(orbslam_server_ODB_HEADERS
-        ${CMAKE_SOURCE_DIR}/orbslam_server/include/person.h
-        ${CMAKE_SOURCE_DIR}/orbslam_server/include/Data_KeyFrame.h
-        include/Data_MapPoint.h
-        include/Serialization.h
-        include/Data_TopoMapPoint.h
-        include/Data_TopoKeyFrame.h)
+        ${PROJECT_SOURCE_DIR}/include/person.h
+        ${PROJECT_SOURCE_DIR}/include/Data_KeyFrame.h
+        ${PROJECT_SOURCE_DIR}/include/Data_MapPoint.h
+        ${PROJECT_SOURCE_DIR}/include/Serialization.h
+        ${PROJECT_SOURCE_DIR}/include/Data_TopoMapPoint.h
+        ${PROJECT_SOURCE_DIR}/include/Data_TopoKeyFrame.h)
 
 message(STATUS "ODB_HEADERS : ${orbslam_server_ODB_HEADERS}")
 
@@ -193,6 +193,7 @@ target_link_libraries(orbslam_server
         ${ODB_LIBRARIES}
         ${catkin_LIBRARIES}
         ${Boost_LIBRARIES}
+        ${OpenCV_LIBRARIES}
         )
 add_dependencies(orbslam_server orbslam_server_gencpp)
 target_include_directories(orbslam_server
