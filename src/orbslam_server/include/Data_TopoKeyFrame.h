@@ -18,7 +18,7 @@
 #include <boost/serialization/set.hpp>
 #include <boost/serialization/serialization.hpp>
 #include <boost/any.hpp>
-#include "../../../../../../usr/include/boost/serialization/string.hpp"
+#include <boost/serialization/string.hpp>
 
 using namespace std;
 
