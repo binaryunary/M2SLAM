@@ -38,6 +38,7 @@ find_package(catkin REQUIRED COMPONENTS
         rospy
         std_msgs
         tf
+        orbslam_server
         )
 
 find_package(OpenCV 2.4.3 QUIET)
@@ -197,7 +198,11 @@ add_library(${PROJECT_NAME} SHARED
         src/LightKeyFrame.cc
         include/LightMapPoint.h
         src/LightMapPoint.cc
-        include/SerializeObject.h include/DataDriver.h src/DataDriver.cc include/TopoMap.h src/TopoMap.cc)
+        include/SerializeObject.h
+        include/DataDriver.h
+        src/DataDriver.cc
+        include/TopoMap.h
+        src/TopoMap.cc)
 
 target_link_libraries(${PROJECT_NAME}
         ${OpenCV_LIBS}
