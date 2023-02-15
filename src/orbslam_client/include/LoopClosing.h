@@ -75,11 +75,13 @@ public:
     bool isFinishedGBA(){
         unique_lock<std::mutex> lock(mMutexGBA);
         return mbFinishedGBA;
-    }   
+    }
 
     void RequestFinish();
 
     bool isFinished();
+
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
 protected:
 
