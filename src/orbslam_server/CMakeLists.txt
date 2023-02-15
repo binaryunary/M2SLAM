@@ -14,7 +14,13 @@ find_package(catkin REQUIRED COMPONENTS
         )
 
 ## System dependencies are found with CMake's conventions
-find_package(OpenCV 2.4.3 REQUIRED)
+find_package(OpenCV 2.4.3 QUIET)
+ if(NOT OpenCV_FOUND)
+    find_package(OpenCV 3.0 QUIET)
+    if(NOT OpenCV_FOUND)
+       message(FATAL_ERROR "OpenCV > 2.4.3 not found.")
+    endif()
+ endif()
 find_package(Boost COMPONENTS serialization system filesystem REQUIRED)
 
 
