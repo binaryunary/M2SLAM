@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
-#project(ORB_SLAM2)
 project(orbslam_client)
 
 IF (NOT CMAKE_BUILD_TYPE)
-    SET(CMAKE_BUILD_TYPE Release)
+SET(CMAKE_BUILD_TYPE Release)
 ENDIF ()
 
 MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
+#project(ORB_SLAM2)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall -O3 -march=native ")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -march=native ")
@@ -38,7 +38,6 @@ find_package(catkin REQUIRED COMPONENTS
         rospy
         std_msgs
         tf
-        orbslam_server
         )
 
 find_package(OpenCV 2.4.3 QUIET)
@@ -57,6 +56,9 @@ find_package(Boost COMPONENTS serialization system filesystem REQUIRED)
 ## find libpcl
 find_package(PCL REQUIRED)
 
+## find orbslam_server
+find_package(orbslam_server REQUIRED)
+include_directories(${orbslam_server_INCLUDE_DIRS})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
