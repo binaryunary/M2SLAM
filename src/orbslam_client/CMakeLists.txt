@@ -48,11 +48,14 @@ find_package(OpenCV 2.4.3 QUIET)
        message(FATAL_ERROR "OpenCV > 2.4.3 not found.")
     endif()
  endif()
-find_package(Eigen3 3.1.0 REQUIRED)
+find_package(Eigen3 3.1.0 REQUIRED NO_MODULE)
 find_package(Pangolin REQUIRED)
 
 ### find and configure Boost
 find_package(Boost COMPONENTS serialization system filesystem REQUIRED)
+
+## find libpcl
+find_package(PCL REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -163,7 +166,8 @@ include_directories(
         ${Pangolin_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIR}
         ${PROJECT_SOURCE_DIR}/Examples/RGB-D
-        /usr/local/include/pcl-1.8
+        ${PCL_INCLUDE_DIRS}
+        # /usr/local/include/pcl-1.8
 )
 
 ## Declare a C++ library
