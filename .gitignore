@@ -1,9 +1,21 @@
-.vscode/
 build/
 devel/
+install/
 logs/
 .catkin_tools/
 lib/
 
 .catkin_workspace
 -.s
+
+ORBvoc.txt
+
+KeyFrameTrajectory.txt
+kfpose.txt
+localmappingcost.txt
+loopclosingcost.txt
+mymapsize.txt
+
+orbslam_client_node_mono_tum
+orbslam_client_node_rgbd_tum
+orbslam_client_node_stereo_kitti
