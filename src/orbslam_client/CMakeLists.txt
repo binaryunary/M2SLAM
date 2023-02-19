@@ -38,6 +38,7 @@ find_package(catkin REQUIRED COMPONENTS
         rospy
         std_msgs
         tf
+        cv_bridge
         )
 
 find_package(OpenCV 2.4.3 QUIET)
@@ -211,9 +212,9 @@ add_library(${PROJECT_NAME} SHARED
         src/TopoMap.cc)
 
 target_link_libraries(${PROJECT_NAME}
-        ${OpenCV_LIBS}
+        ${OpenCV_LIBRARIES}
         ${catkin_LIBRARIES}
-        ${EIGEN3_LIBS}
+        ${EIGEN3_LIBRARIES}
         ${Pangolin_LIBRARIES}
         ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
         ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
@@ -231,8 +232,6 @@ target_link_libraries(${PROJECT_NAME}
 
 # Build examples
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/RGB-D)
-
 add_executable(orbslam_client_node_rgbd_tum
         Examples/RGB-D/rgbd_tum.cc
         Examples/RGB-D/ros_viewer.cpp)
@@ -241,8 +240,6 @@ target_link_libraries(orbslam_client_node_rgbd_tum
         ${catkin_LIBRARIES}
         ${PROJECT_NAME}
         )
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo)
 
 add_executable(orbslam_client_node_stereo_kitti
         Examples/Stereo/stereo_kitti.cc)
@@ -256,19 +253,27 @@ target_link_libraries(orbslam_client_node_stereo_kitti
 #
 
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
-
 add_executable(orbslam_client_node_mono_tum
         Examples/Monocular/mono_tum.cc)
-
 target_link_libraries(orbslam_client_node_mono_tum
         ${PROJECT_NAME}
         ${catkin_LIBRARIES}
         )
 
-#add_executable(orbslam_client_node_mono_kitti
-#        Examples/Monocular/mono_kitti.cc)
-#target_link_libraries(orbslam_client_node_mono_kitti ${PROJECT_NAME})
+add_executable(orbslam_client_node_mono_kitti
+       Examples/Monocular/mono_kitti.cc)
+target_link_libraries(orbslam_client_node_mono_kitti
+        ${PROJECT_NAME}
+        ${catkin_LIBRARIES})
+
+
+add_executable(orbslam_client_ros_mono
+       Examples/ROS/ORB_SLAM2/src/ros_mono.cc)
+target_link_libraries(orbslam_client_ros_mono
+        ${OpenCV_LIBRARIES}
+        ${PROJECT_NAME}
+        ${catkin_LIBRARIES})
+
 #
 #add_executable(orbslam_client_node_mono_euroc
 #        Examples/Monocular/mono_euroc.cc)
