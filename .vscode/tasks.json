@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "shell",
-      "command": "catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1", // <- ADD OTHER CMAKE DIRECTIVES HERE
+      "command": "catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=1",
       "problemMatcher": [
         "$catkin-gcc"
       ],
