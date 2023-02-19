@@ -270,8 +270,8 @@ target_link_libraries(orbslam_client_node_mono_kitti
 add_executable(orbslam_client_ros_mono
        Examples/ROS/ORB_SLAM2/src/ros_mono.cc)
 target_link_libraries(orbslam_client_ros_mono
-        ${OpenCV_LIBRARIES}
         ${PROJECT_NAME}
+        ${OpenCV_LIBRARIES}
         ${catkin_LIBRARIES})
 
 #
@@ -294,11 +294,17 @@ target_link_libraries(orbslam_client_ros_mono
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS orbslam_client orbslam_client_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(TARGETS orbslam_client
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(TARGETS orbslam_client_ros_mono
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -307,12 +313,12 @@ target_link_libraries(orbslam_client_ros_mono
 #   PATTERN ".svn" EXCLUDE
 # )
 
-## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+## Install manually built Thirdparty libs that are not catkin projects
+install(FILES
+  ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
+  ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
+  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
 
 #############
 ## Testing ##
