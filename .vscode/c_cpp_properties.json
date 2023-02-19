@@ -1,21 +1,22 @@
 {
   "configurations": [
     {
-      "browse": {
-        "databaseFilename": "${default}",
-        "limitSymbolsToIncludedHeaders": false
-      },
-      "includePath": [
-        "/data/M2SLAM/devel/include/**",
-        "/opt/ros/melodic/include/**",
-        "/usr/include/**"
-      ],
-      "name": "ROS",
-      "intelliSenseMode": "gcc-arm64",
-      "compilerPath": "/usr/bin/gcc",
-      "cStandard": "gnu11",
-      "cppStandard": "c++14",
-      "compileCommands": "${workspaceFolder}/compile_commands.json"
+      // "browse": {
+      //   "databaseFilename": "${default}",
+      //   "limitSymbolsToIncludedHeaders": false
+      // },
+      // "includePath": [
+      //   "/data/M2SLAM/devel/include/**",
+      //   "/opt/ros/melodic/include/**",
+      //   "/usr/include/**"
+      // ],
+      // "name": "ROS",
+      "intelliSenseMode": "${default}",
+      // "compilerPath": "/usr/bin/gcc",
+      // "cStandard": "c11",
+      // "cppStandard": "c++11",
+      // "compileCommands": "${workspaceFolder}/compile_commands.json"
+      "configurationProvider": "b2.catkin_tools"
     }
   ],
   "version": 4
