@@ -225,14 +225,7 @@ namespace ORB_SLAM2 {
             }
         }
 
-        cv::Mat imToFeed = im.clone();
-        cv::Mat resizedIm;
-        cv::Size newSize(640, 400);
-        cv::resize(im, resizedIm, newSize);
-        imToFeed = resizedIm;
-
-        // return mpTracker->GrabImageMonocular(im, timestamp);
-        return mpTracker->GrabImageMonocular(imToFeed, timestamp);
+        return mpTracker->GrabImageMonocular(im, timestamp);
     }
 
     void System::ActivateLocalizationMode() {
