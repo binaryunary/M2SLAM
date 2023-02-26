@@ -119,7 +119,7 @@ int main(int argc, char **argv)
     cout << "mean tracking time: " << totaltime/nImages << endl;
 
     // Save camera trajectory
-    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");    
+    SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
 
     return 0;
 }
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 void LoadImages(const string &strPathToSequence, vector<string> &vstrImageFilenames, vector<double> &vTimestamps)
 {
     ifstream fTimes;
-    string strPathTimeFile = strPathToSequence + "/times.txt";
+    string strPathTimeFile = strPathToSequence + "/timestamps.txt";
     fTimes.open(strPathTimeFile.c_str());
     while(!fTimes.eof())
     {
@@ -135,15 +135,27 @@ void LoadImages(const string &strPathToSequence, vector<string> &vstrImageFilena
         getline(fTimes,s);
         if(!s.empty())
         {
-            stringstream ss;
-            ss << s;
-            double t;
-            ss >> t;
-            vTimestamps.push_back(t);
+            std::tm tm = {};
+            istringstream ss(s);
+            ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
+
+            auto tp = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+            std::size_t dot_pos = s.find_last_of(".");
+            int milliseconds = 0;
+            if (dot_pos != std::string::npos)
+            {
+                std::string milliseconds_str = s.substr(dot_pos + 1);
+                milliseconds = std::stoi(milliseconds_str);
+            }
+
+            std::chrono::milliseconds ms(milliseconds);
+            auto timestamp = tp + ms;
+            auto timestamp_ms = std::chrono::time_point_cast<std::chrono::milliseconds>(timestamp);
+            vTimestamps.push_back(std::chrono::time_point_cast<std::chrono::milliseconds>(timestamp_ms).time_since_epoch().count());
         }
     }
 
-    string strPrefixLeft = strPathToSequence + "/image_0/";
+    string strPrefixLeft = strPathToSequence + "/data/";
 
     const int nTimes = vTimestamps.size();
     vstrImageFilenames.resize(nTimes);
@@ -151,7 +163,7 @@ void LoadImages(const string &strPathToSequence, vector<string> &vstrImageFilena
     for(int i=0; i<nTimes; i++)
     {
         stringstream ss;
-        ss << setfill('0') << setw(6) << i;
+        ss << setfill('0') << setw(10) << i;
         vstrImageFilenames[i] = strPrefixLeft + ss.str() + ".png";
     }
 }

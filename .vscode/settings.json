@@ -89,7 +89,9 @@
         "ios": "cpp",
         "locale": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "*.txx": "cpp",
+        "*.ipp": "cpp"
     },
     "files.exclude": {
         // ".catkin_tools/": true,
@@ -98,4 +100,5 @@
         // "devel*/": true,
         // "logs*/": true,
     },
+    "ros.rosSetupScript": "${workspaceFolder}/install/setup.sh",
 }
